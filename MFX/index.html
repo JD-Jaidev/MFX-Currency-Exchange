@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MFX ~ Multi-Currency Exchange & Market Trends</title>
+  <meta name="description" content="MFX is a modern fintech platform for real-time multi-currency exchange rates, historical trend analysis, and market insights powered by the Frankfurter API.">
+  <meta name="keywords" content="currency converter, exchange rates, foreign exchange, forex trends, historical rates, fintech dashboard, Frankfurter API, Chart.js">
+  <meta name="author" content="Jaidev S & Nitin VR">
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%232563EB'/><text y='72' x='50' text-anchor='middle' font-size='64' font-family='Space Grotesk, system-ui, sans-serif' font-weight='bold' fill='white'>$</text></svg>">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container" class="toast-container" aria-live="polite"></div>
+
+  <!-- Mobile Navigation Overlay & Drawer -->
+  <div id="mobile-menu-overlay" class="mobile-menu-overlay" aria-hidden="true"></div>
+  <aside id="mobile-menu-drawer" class="mobile-menu-drawer" aria-label="Mobile Navigation">
+    <div>
+      <div class="mobile-drawer-header">
+        <div class="brand-logo">
+          <div class="brand-icon-box">$</div>
+          <span class="brand-name">MFX</span>
+        </div>
+        <button id="mobile-drawer-close" class="action-icon-btn" aria-label="Close menu">✕</button>
+      </div>
+      <ul class="mobile-nav-links">
+        <li><a href="#hero" class="mobile-nav-link"><span>🏠</span> Home</a></li>
+        <li><a href="#developers" class="mobile-nav-link"><span>👨‍💻</span> Developers</a></li>
+        <li><a href="#converter" class="mobile-nav-link"><span>💱</span> Converter</a></li>
+        <li><a href="#quick-pairs" class="mobile-nav-link"><span>⚡</span> Quick Pairs</a></li>
+        <li><a href="#trends" class="mobile-nav-link"><span>📈</span> Trends</a></li>
+        <li><a href="#popular" class="mobile-nav-link"><span>🌐</span> Currencies</a></li>
+        <li><a href="#about" class="mobile-nav-link"><span>ℹ️</span> About</a></li>
+      </ul>
+    </div>
+  </aside>
+
+  <!-- Floating Glassmorphism Navigation Bar -->
+  <header class="header-nav">
+    <nav class="nav-container" aria-label="Main Navigation">
+      <a href="#hero" class="brand-logo" aria-label="MFX Home">
+        <div class="brand-icon-box">$</div>
+        <span class="brand-name">MFX</span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#hero" class="nav-link active">Home</a></li>
+        <li><a href="#developers" class="nav-link">Developers</a></li>
+        <li><a href="#converter" class="nav-link">Converter</a></li>
+        <li><a href="#quick-pairs" class="nav-link">Quick Pairs</a></li>
+        <li><a href="#trends" class="nav-link">Trends</a></li>
+        <li><a href="#popular" class="nav-link">Currencies</a></li>
+        <li><a href="#about" class="nav-link">About</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="#converter" class="btn-nav-action">Convert Now ↗</a>
+        <button id="mobile-menu-toggle" class="mobile-menu-toggle" aria-label="Open Navigation Menu">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Main Content Wrapper -->
+  <main>
+
+    <!-- SECTION 1: HERO -->
+    <section id="hero" class="section hero-section">
+      <div class="container">
+        <div class="hero-badge-container">
+          <div class="live-indicator-pill">
+            <span class="pulse-dot"></span>
+            <span>LIVE ECB RATES</span>
+          </div>
+          <div class="hero-market-clock">
+            <span id="live-utc-clock">--:--:-- UTC</span> • <span id="market-active-session">Global Forex</span>
+          </div>
+        </div>
+
+        <h1 class="hero-title">
+          Convert. Compare. <span class="gradient-text-primary">Understand.</span>
+        </h1>
+
+        <p class="hero-subtitle">
+          Next-generation Multi-Currency Intelligence Platform.
+        </p>
+
+        <div class="hero-cta-group">
+          <a href="#converter" id="hero-cta-convert" class="btn btn-primary">
+            <span>Launch Converter</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="#trends" id="hero-cta-trends" class="btn btn-secondary">
+            <span>Explore Trends</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 3v18h18M18 9l-6 6-4-4-5 5"/></svg>
+          </a>
+        </div>
+
+        <!-- Quick Top Metrics Bar -->
+        <div class="hero-stats-bar">
+          <div class="hero-stat-item glass-panel">
+            <div class="hero-stat-val gradient-text-primary">30+</div>
+            <div class="hero-stat-label">Global Currencies</div>
+          </div>
+          <div class="hero-stat-item glass-panel">
+            <div class="hero-stat-val gradient-text-warm">ECB Backed</div>
+            <div class="hero-stat-label">Official Rates</div>
+          </div>
+          <div class="hero-stat-item glass-panel">
+            <div class="hero-stat-val gradient-text-primary">100% Client-Side</div>
+            <div class="hero-stat-label">Fast & Private</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: DEVELOPERS (MOVED TO START) -->
+    <section id="developers" class="section developers-section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Engineering</span>
+          <h2 class="section-title">Meet the <span class="gradient-text-primary">Developers</span></h2>
+          <p class="section-desc">The engineering minds behind MFX Multi-Currency Exchange & Market Trends.</p>
+        </div>
+
+        <div class="developers-grid">
+          <!-- Jaidev S -->
+          <div class="dev-card glass-panel">
+            <div class="dev-avatar-wrapper">
+              <img src="assets/prof-img.png" alt="Jaidev S" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+              <span class="avatar-fallback" style="display:none;">JS</span>
+            </div>
+            <h3 class="dev-name">Jaidev S</h3>
+            <div class="dev-role">AI Developer</div>
+            <p class="dev-bio">Passionate about scalable web architectures, financial data visualization, and modern web APIs.</p>
+            <div class="dev-badges">
+              <span class="dev-badge">Python</span>
+              <span class="dev-badge">AI/ML</span>
+              <span class="dev-badge">APIs & LLMs</span>
+              <span class="dev-badge">RAG</span>
+            </div>
+          </div>
+
+          <!-- Jaidev S -->
+          <div class="dev-card glass-panel">
+            <div class="dev-avatar-wrapper">
+              <img src="assets/prof-img2.jpeg" alt="Nitin V R" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+              <span class="avatar-fallback" style="display:none;">NVR</span>
+            </div>
+            <h3 class="dev-name">Nitin V R</h3>
+            <div class="dev-role">Software Developer</div>
+            <p class="dev-bio">Passionate about scalable web architectures, financial data visualization, and modern web APIs.</p>
+            <div class="dev-badges">
+              <span class="dev-badge">Python</span>
+              <span class="dev-badge">WebDev(HTML, CSS, JS)</span>
+              <span class="dev-badge">Rust</span>
+              <span class="dev-badge">Swift</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: CURRENCY CONVERTER -->
+    <section id="converter" class="section converter-section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Instant Exchange</span>
+          <h2 class="section-title">Precision <span class="gradient-text-primary">Currency Converter</span></h2>
+          <p class="section-desc">Real-time calculations with instant reverse conversions, live market spreads, and favorite pair storage.</p>
+        </div>
+
+        <div class="converter-card glass-panel">
+          <!-- Loading Overlay -->
+          <div id="converter-loader" class="converter-loader-overlay hidden" aria-hidden="true">
+            <div class="spinner"></div>
+          </div>
+
+          <form id="currency-converter-form" onsubmit="event.preventDefault();">
+            <!-- Preset Quick Amount Chips -->
+            <div class="preset-amounts-row">
+              <span class="preset-label">Quick Presets:</span>
+              <button type="button" class="preset-amount-btn" data-amount="100">100</button>
+              <button type="button" class="preset-amount-btn" data-amount="1000">1,000</button>
+              <button type="button" class="preset-amount-btn" data-amount="5000">5,000</button>
+              <button type="button" class="preset-amount-btn" data-amount="10000">10,000</button>
+            </div>
+
+            <div class="converter-form-grid">
+              <!-- Amount Input -->
+              <div class="form-group">
+                <label for="converter-amount-input" class="form-label">Amount</label>
+                <div class="input-wrapper">
+                  <input
+                    type="number"
+                    id="converter-amount-input"
+                    class="form-input"
+                    value="1"
+                    min="0.0001"
+                    step="any"
+                    placeholder="Enter amount"
+                    required
+                    aria-label="Conversion Amount"
+                  />
+                </div>
+              </div>
+
+              <!-- From Currency Selector -->
+              <div class="form-group">
+                <label class="form-label">From Currency</label>
+                <button type="button" id="from-currency-trigger" class="currency-selector-trigger" aria-haspopup="true" aria-label="Select Source Currency">
+                  <div class="trigger-content">
+                    <span id="from-currency-flag" class="currency-flag-icon">🇺🇸</span>
+                    <span id="from-currency-code" class="currency-code-text">USD</span>
+                    <span id="from-currency-name" class="currency-name-truncate">United States Dollar</span>
+                  </div>
+                  <span class="trigger-chevron">▼</span>
+                </button>
+
+                <!-- Searchable Popover Modal -->
+                <div id="from-dropdown-modal" class="currency-dropdown-modal" role="dialog" aria-label="Source Currency List">
+                  <div class="dropdown-search-wrapper">
+                    <input type="text" id="from-currency-search" class="dropdown-search-input" placeholder="Search currency or country..." autocomplete="off">
+                  </div>
+                  <div id="from-currency-list" class="currency-options-list"></div>
+                </div>
+              </div>
+
+              <!-- Swap Button -->
+              <div class="swap-btn-container">
+                <button type="button" id="btn-swap-currencies" class="btn-swap" aria-label="Swap Currencies" title="Swap From and To currencies">
+                  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path d="M7 16V4M7 4L3 8M7 4L11 8M17 8V20M17 20L21 16M17 20L13 16"/>
+                  </svg>
+                </button>
+              </div>
+
+              <!-- To Currency Selector -->
+              <div class="form-group">
+                <label class="form-label">To Currency</label>
+                <button type="button" id="to-currency-trigger" class="currency-selector-trigger" aria-haspopup="true" aria-label="Select Target Currency">
+                  <div class="trigger-content">
+                    <span id="to-currency-flag" class="currency-flag-icon">🇮🇳</span>
+                    <span id="to-currency-code" class="currency-code-text">INR</span>
+                    <span id="to-currency-name" class="currency-name-truncate">Indian Rupee</span>
+                  </div>
+                  <span class="trigger-chevron">▼</span>
+                </button>
+
+                <!-- Searchable Popover Modal -->
+                <div id="to-dropdown-modal" class="currency-dropdown-modal" role="dialog" aria-label="Target Currency List">
+                  <div class="dropdown-search-wrapper">
+                    <input type="text" id="to-currency-search" class="dropdown-search-input" placeholder="Search currency or country..." autocomplete="off">
+                  </div>
+                  <div id="to-currency-list" class="currency-options-list"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Converted Output Card -->
+            <div class="converter-result-box">
+              <div class="result-main-area">
+                <span class="result-tagline">Converted Result</span>
+                <div id="converter-result-value" class="result-value-display">--</div>
+                <div class="rate-info-line">
+                  <span id="converter-rate-info">1 USD = -- INR</span>
+                  <span>•</span>
+                  <span id="converter-inverted-rate" class="rate-subtext">1 INR = -- USD</span>
+                </div>
+                <div id="converter-last-updated" class="rate-subtext">Fetching live data...</div>
+              </div>
+
+              <div class="result-actions-area">
+                <!-- Star / Favorite Pair Button -->
+                <button type="button" id="btn-favorite-pair" class="action-icon-btn" aria-label="Add to Favorites" title="Save this pair to favorites">
+                  <svg class="icon-star outline" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                  </svg>
+                </button>
+                <!-- Copy Result Button -->
+                <button type="button" id="btn-copy-result" class="action-icon-btn" aria-label="Copy Result" title="Copy conversion result to clipboard">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Favorite Pairs Chips -->
+            <div class="favorites-wrapper" style="margin-top: 1.25rem;">
+              <span class="form-label">⭐ Saved Favorite Pairs</span>
+              <div id="favorites-list-container" class="favorites-row-container"></div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: QUICK CURRENCY PAIRS -->
+    <section id="quick-pairs" class="section quick-pairs-section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Market Watch</span>
+          <h2 class="section-title">Popular <span class="gradient-text-primary">Currency Pairs</span></h2>
+          <p class="section-desc">Direct live exchange rates for high-volume trading pairs with one-click conversion.</p>
+        </div>
+
+        <div id="quick-pairs-grid" class="quick-pairs-grid">
+          <!-- Injected dynamically by js/app.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: HISTORICAL TRENDS & STATISTICS -->
+    <section id="trends" class="section trends-section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Market Intelligence</span>
+          <h2 class="section-title">Historical <span class="gradient-text-primary">Rate Trends</span></h2>
+          <p class="section-desc">Interactive time-series analysis with high/low volatility metrics powered by European Central Bank datasets.</p>
+        </div>
+
+        <div class="chart-card glass-panel">
+          <!-- Chart Loader -->
+          <div id="chart-loader" class="converter-loader-overlay hidden" aria-hidden="true">
+            <div class="spinner"></div>
+          </div>
+
+          <div class="chart-header-row">
+            <div class="chart-header-titles">
+              <h3 id="chart-pair-title">Exchange Rate Trajectory</h3>
+              <p id="chart-pair-subtitle">USD to INR • Last 1 Month</p>
+            </div>
+
+            <!-- Timeframe Filter Tabs -->
+            <div class="timeframe-tabs-group" role="tablist" aria-label="Chart Timeframes">
+              <button class="timeframe-tab-btn active" data-period="1M" role="tab" aria-selected="true">1M</button>
+              <button class="timeframe-tab-btn" data-period="3M" role="tab" aria-selected="false">3M</button>
+              <button class="timeframe-tab-btn" data-period="6M" role="tab" aria-selected="false">6M</button>
+              <button class="timeframe-tab-btn" data-period="1Y" role="tab" aria-selected="false">1Y</button>
+            </div>
+          </div>
+
+          <!-- Chart.js Canvas -->
+          <div class="chart-canvas-container">
+            <canvas id="trend-chart-canvas"></canvas>
+          </div>
+
+          <!-- KEY STATISTICAL INDICATORS -->
+          <div id="statistics" class="chart-statistics-grid">
+            <div class="stat-box">
+              <div class="stat-box-label">Current Rate</div>
+              <div id="stat-current-rate" class="stat-box-value gradient-text-primary">--</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-box-label">Period Peak (High)</div>
+              <div id="stat-high-rate" class="stat-box-value">--</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-box-label">Period Trough (Low)</div>
+              <div id="stat-low-rate" class="stat-box-value">--</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-box-label">Average Rate</div>
+              <div id="stat-avg-rate" class="stat-box-value">--</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-box-label">Net Volatility / Change</div>
+              <div id="stat-pct-change" class="stat-box-value">--</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 6: POPULAR CURRENCIES GRID -->
+    <section id="popular" class="section popular-section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Global Matrix</span>
+          <h2 class="section-title">Major World <span class="gradient-text-primary">Currencies</span></h2>
+          <p class="section-desc">Key global reserve and high-liquidity fiat currencies benchmarked against USD.</p>
+        </div>
+
+        <div id="popular-currencies-grid" class="popular-currencies-grid">
+          <!-- Injected dynamically by js/app.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 7: ABOUT MFX -->
+    <section id="about" class="section about-section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Transparency</span>
+          <h2 class="section-title">About <span class="gradient-text-primary">MFX Engine</span></h2>
+          <p class="section-desc">Engineered with high performance, precision math, and zero external tracker footprint.</p>
+        </div>
+
+        <div class="about-features-grid">
+          <div class="about-feature-card glass-panel">
+            <div class="feature-icon-box">⚡</div>
+            <h3 class="step-title">Sub-Millisecond Engine</h3>
+            <p class="step-desc">Zero bloat, pure vanilla client execution guarantees instant calculations, low latency, and smooth UI transitions.</p>
+          </div>
+          <div class="about-feature-card glass-panel">
+            <div class="feature-icon-box">🔒</div>
+            <h3 class="step-title">100% Privacy Focused</h3>
+            <p class="step-desc">All conversions, queries, and favorites stay strictly within your browser. No tracking cookies or telemetry.</p>
+          </div>
+          <div class="about-feature-card glass-panel">
+            <div class="feature-icon-box">📊</div>
+            <h3 class="step-title">Institutional Precision</h3>
+            <p class="step-desc">Exchange rate feeds are requested directly via the European Central Bank (ECB) benchmark standards.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 8: FINAL MFX BRANDING -->
+    <section class="section final-branding-section">
+      <div class="container">
+        <h2 class="final-mfx-logo">MFX</h2>
+        <p class="final-tagline">Multi-Currency Exchange & Market Trends</p>
+        <div class="final-developed-by">
+          Developed by <strong>Jaidev S</strong> & <strong>Nitin VR</strong>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- SECTION 9: FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-copy">
+          © 2026 MFX. Powered by Frankfurter API & European Central Bank (ECB) Reference Rates.
+        </div>
+        <ul class="footer-links">
+          <li><a href="#hero" class="footer-link">Home</a></li>
+          <li><a href="#developers" class="footer-link">Developers</a></li>
+          <li><a href="#converter" class="footer-link">Converter</a></li>
+          <li><a href="#quick-pairs" class="footer-link">Quick Pairs</a></li>
+          <li><a href="#trends" class="footer-link">Trends</a></li>
+          <li><a href="#about" class="footer-link">About</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scroll to Top Floating Button -->
+  <button id="scroll-to-top-btn" class="scroll-to-top-btn" aria-label="Scroll to top" title="Scroll to top">
+    ▲
+  </button>
+
+  <!-- Application Scripts -->
+  <script src="js/app.js"></script>
+</body>
+</html>
