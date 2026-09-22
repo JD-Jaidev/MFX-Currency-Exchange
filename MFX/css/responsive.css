@@ -1,0 +1,194 @@
+/* ==========================================================================
+   MFX — Responsive Breakpoints & Mobile Adaptations
+   ========================================================================== */
+
+/* Large Tablets & Small Laptops (max-width: 1024px) */
+@media (max-width: 1024px) {
+  .section {
+    padding: 4rem 0;
+  }
+
+  .converter-form-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+  }
+
+  .swap-btn-container {
+    grid-column: span 2;
+    justify-content: center;
+    margin: 0.25rem 0;
+  }
+
+  .chart-canvas-container {
+    height: 320px;
+  }
+}
+
+/* Tablets & Mobile (max-width: 768px) */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+  }
+
+  .btn-nav-action {
+    display: none;
+  }
+
+  .mobile-menu-toggle {
+    display: block;
+  }
+
+  .hero-section {
+    padding-top: 7rem;
+    padding-bottom: 3rem;
+  }
+
+  .hero-title {
+    font-size: 2.3rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+    margin-bottom: 1.75rem;
+  }
+
+  .hero-cta-group {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .hero-cta-group .btn {
+    width: 100%;
+  }
+
+  .converter-card {
+    padding: 1.5rem 1.2rem;
+  }
+
+  .converter-form-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .swap-btn-container {
+    grid-column: span 1;
+    margin: 0.2rem 0;
+  }
+
+  .converter-result-box {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1.25rem;
+  }
+
+  .result-actions-area {
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  .currency-dropdown-modal {
+    position: fixed;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) scale(0.95) !important;
+    width: 90vw !important;
+    max-width: 360px !important;
+    max-height: 80vh !important;
+  }
+
+  .currency-dropdown-modal.open {
+    transform: translate(-50%, -50%) scale(1) !important;
+  }
+
+  .chart-card {
+    padding: 1.25rem 1rem;
+  }
+
+  .chart-header-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .timeframe-tabs-group {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .timeframe-tab-btn {
+    flex: 1;
+    text-align: center;
+    padding: 0.4rem 0.6rem;
+    font-size: 0.8rem;
+  }
+
+  .chart-canvas-container {
+    height: 260px;
+  }
+
+  .chart-statistics-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+  }
+
+  .stat-box {
+    padding: 0.85rem;
+  }
+
+  .stat-box-value {
+    font-size: 1.05rem;
+  }
+
+  .quick-pairs-grid,
+  .popular-currencies-grid,
+  .about-features-grid,
+  .developers-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .final-branding-section {
+    padding: 4.5rem 0 3.5rem;
+  }
+
+  .final-mfx-logo {
+    font-size: 4.5rem;
+  }
+
+  .footer-inner {
+    flex-direction: column;
+    text-align: center;
+    gap: 1.25rem;
+  }
+
+  .footer-links {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .scroll-to-top-btn {
+    bottom: 1.25rem;
+    right: 1.25rem;
+    width: 40px;
+    height: 40px;
+  }
+}
+
+/* Small Mobile (max-width: 420px) */
+@media (max-width: 420px) {
+  .chart-statistics-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .preset-amounts-row {
+    gap: 0.35rem;
+  }
+
+  .preset-amount-btn {
+    padding: 0.2rem 0.55rem;
+    font-size: 0.75rem;
+  }
+
+  .final-mfx-logo {
+    font-size: 3.8rem;
+  }
+}
